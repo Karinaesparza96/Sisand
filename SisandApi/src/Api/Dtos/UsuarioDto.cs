@@ -6,7 +6,7 @@ namespace Api.Dtos
 {
     public class UsuarioDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [StringLength(150, ErrorMessage = "O campo {0} precisa estar entre {2} e {1} caracteres.", MinimumLength = 2)]
@@ -22,8 +22,8 @@ namespace Api.Dtos
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public string? CPF { get; set; }
 
-        public DateTime DataCadastro { get; set; }
-        public DateTime DataAtualizacao { get; set; }
+        public DateTime? DataCadastro { get; set; }
+        public DateTime? DataAtualizacao { get; set; }
 
     }
 }

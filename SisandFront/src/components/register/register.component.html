@@ -1,0 +1,38 @@
+
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <app-alert-errors [errors]="errors"/>
+    <div class="col-md-6">
+      <h2 class="text-center">Registrar</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email">
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger">
+            <small *ngIf="registerForm.get('email')?.errors?.['required']">O email é obrigatório.</small>
+            <small *ngIf="registerForm.get('email')?.errors?.['email']">O email é inválido.</small>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" id="password" class="form-control" formControlName="password">
+          <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger">
+            <small *ngIf="registerForm.get('password')?.errors?.['required']">A senha é obrigatória.</small>
+            <small *ngIf="registerForm.get('password')?.errors?.['minlength']">A senha deve ter pelo menos 6 caracteres.</small>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirmar Senha</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+          <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="text-danger">
+            <small>As senhas não conferem.</small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">Registrar</button>
+        <div class="text-center mt-3">
+          <a routerLink="/login">Já tem uma conta? Faça login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

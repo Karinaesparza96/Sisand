@@ -20,7 +20,7 @@ namespace Data.Context
         {
             foreach (var entry in ChangeTracker.Entries())
             {
-                if (entry is Usuario)
+                if (entry.Entity is Usuario)
                 {
                     if (entry.State == EntityState.Added)
                     {

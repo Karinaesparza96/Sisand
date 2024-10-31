@@ -1,0 +1,7 @@
+<div *ngIf="ativo && errors?.length" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <h6 class="alert-heading">Erros:</h6>
+  <ul>
+      <li *ngFor="let error of errors">{{ error }}</li>
+  </ul>
+  <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+</div>

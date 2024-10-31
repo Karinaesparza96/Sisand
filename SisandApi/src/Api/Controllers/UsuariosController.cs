@@ -52,6 +52,7 @@ namespace Api.Controllers
             return CustomResponse(HttpStatusCode.Created);
         }
 
+        [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Atualizar(int id, [FromBody]UsuarioDto usuarioDto)
         {   
@@ -70,6 +71,7 @@ namespace Api.Controllers
             return CustomResponse(HttpStatusCode.NoContent);
         }
 
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Remover(int id)
         {
