@@ -40,6 +40,7 @@ export class UserListComponent implements OnInit {
       this.userService.excluirUsuario(this.usuario.id).subscribe(
         sucesso => { this.processarSucesso() },
         falha => { this.processarFalha(falha) })
+        this.isModalVisible = false
     }
     this.isModalVisible = false;
   }

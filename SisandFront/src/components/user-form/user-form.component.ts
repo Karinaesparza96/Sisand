@@ -15,13 +15,23 @@ import { NgxMaskDirective } from 'ngx-mask';
 })
 export class UserFormComponent implements OnInit {
   user!: User;
-  usuarioForm!: FormGroup;
+  usuarioForm: FormGroup;
   errors: [] = []
 
   constructor(private fb: FormBuilder, 
               private userService: UserService, 
               private router: Router, 
-              private route: ActivatedRoute ) {}
+              private route: ActivatedRoute) 
+  {      
+    this.usuarioForm = this.fb.group({
+      id: [null],
+      nomeCompleto: ['', [Validators.required]],
+      dataNascimento: ['', [Validators.required]],
+      cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
+      dataCadastro: [null],
+      dataAtualizacao: [null],
+    });
+  }
 
   ngOnInit(): void {
     this.carregarUsuario();
@@ -40,14 +50,16 @@ export class UserFormComponent implements OnInit {
   }
 
   initializeForm() {
-    this.usuarioForm = this.fb.group({
-      id: [this.user?.id],
-      nomeCompleto: [this.user?.nomeCompleto || '', [Validators.required]],
-      dataNascimento: [this.formataData() || '', [Validators.required]],
-      cpf: [this.user?.cpf || '', [Validators.required, Validators.pattern(/^\d{11}$/)]],
-      dataCadastro: [this.user?.dataCadastro],
-      dataAtualizacao: [this.user?.dataAtualizacao],
-    });
+    if (this.user) {
+      this.usuarioForm.patchValue({
+        id: this.user.id,
+        nomeCompleto: this.user.nomeCompleto || '',
+        dataNascimento: this.formataData() || '',
+        cpf: this.user.cpf || '',
+        dataCadastro: this.user.dataCadastro,
+        dataAtualizacao: this.user.dataAtualizacao,
+      });
+    }
   }
 
   onSubmit() {
@@ -77,6 +89,10 @@ export class UserFormComponent implements OnInit {
 
   processarFalha(fail: any) {
     this.errors = fail.error.errors;
+  }
+
+  voltar() {
+    this.router.navigate(['/usuarios']);
   }
 
   private formataData(): string {

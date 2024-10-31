@@ -14,12 +14,11 @@ export class ModalComponent  {
   @Input() isVisible: boolean;
 
   fecharModal() {
-    this.isVisible = false
+    this.confirmaAcao.emit(false)
   }
 
   confirmar() {
     this.confirmaAcao.emit(true)
-    this.isVisible = false
   }
 
 }
