@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace Business.Models
+﻿namespace Business.Models
 {
     public class Usuario
     {   
