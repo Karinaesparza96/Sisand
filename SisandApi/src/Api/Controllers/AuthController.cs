@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Controllers
 {
+    [Route("conta/")]
     public class AuthController(
         SignInManager<IdentityUser> signInManager,
         UserManager<IdentityUser> userManager,
@@ -37,7 +38,7 @@ namespace Api.Controllers
 
                 var token = GerarJwt();
 
-                return CustomResponse(HttpStatusCode.OK, token);
+                return CustomResponse(HttpStatusCode.OK, new { token = token });
             }
 
             Notificar("Falha ao registrar o usuário.");
@@ -54,7 +55,7 @@ namespace Api.Controllers
             if (result.Succeeded)
             {
                 var token = GerarJwt();
-                return CustomResponse(HttpStatusCode.OK, token);
+                return CustomResponse(HttpStatusCode.OK, new { token = token });
             }
 
             Notificar("Usuário ou senha incorretos");
